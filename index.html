@@ -21,7 +21,7 @@
                 see my naughty stuff
             </button>
 
-            <div class="qmarks">
+            <div id="qmarks">
             
             </div>
         </center>
@@ -41,6 +41,34 @@
 
         <script type="text/javascript">
 
+            // set interval
+            console.log("hey");
+
+            var qmarks = document.getElementById("qmarks");
+
+            var rotation = 0;
+            var rotationAmount = 0.2;
+            var rotationMaximum = 20;
+            var spinDirection = true; // true = rechts // false = links
+
+            window.setInterval( function() {
+
+                qmarks.style.transform = "rotate(" + rotation + "deg)";
+
+                if (spinDirection) {
+                    rotation += rotationAmount;
+                } else {
+                    rotation -= rotationAmount;
+                }
+                
+
+                if (rotation > rotationMaximum || rotation < (-1 * rotationMaximum)) {
+                    spinDirection = !spinDirection;
+                }
+
+            }, 200);
+
+
             var music = document.getElementById("music");
             var btn = document.getElementById("button-container");
             var video = document.getElementbyId("container");
@@ -50,10 +78,11 @@
                 btn.style.display = "none";
                 music.play();
                 document.title = "Oops! Don't share, its private!"
-                
             }
 
+
         </script>
+        
         
     </body>
 </html>
@@ -72,28 +101,33 @@
         
     }
 
-    .qmarks {
-        width: 120vw;
-        height: 120vh;
+    #qmarks {
+        width: 200vw;
+        height: 200vh;
 
         background-repeat: repeat;
-        background-image: url("qmark.png");
-        transform: rotate(-7deg);
+        background: 
+            radial-gradient(transparent, black),
+            url("qmark.png");
 
         position: fixed;
 
         z-index: -10;
-        top: -100px;
-        left: -60px;
+        top: -50vh;
+        left: -50vw;
 
         opacity: 0;
 
-        transition: 0.4s;
+        transition: 0.2s;
+        transition-timing-function: linear;
     }
 
-    #button:hover + .qmarks {
-        transition: 0.2s;
+    #button:hover + #qmarks {
+
         opacity: 0.07;
+
+        transition: 0.2s;
+        transition-timing-function: linear;
     }
 
     #button-container {
